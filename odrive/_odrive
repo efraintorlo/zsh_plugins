@@ -1,0 +1,35 @@
+#compdef odrive
+
+typeset -A opt_args
+
+_arguments -C \
+  '1:cmd:->cmds' \
+&& ret=0
+
+case "$state" in
+  (cmds)
+     local commands;
+	 commands=(
+			 'authenticate:authenticate odrive with an auth key' \
+			 'mount:mount remote odrive path to a local folder' \
+			 'unmount:remove a mount' \
+			 'backup:backup a local folder to a remote odrive path' \
+			 'removebackup:remove a backup job' \
+			 'sync:sync a placeholder' \
+			 'stream:stream placholder/remote file eg. stream path | app -' \
+			 'refresh:refresh a folder' \
+			 'unsync:unsync a file or a folder' \
+			 'xlthreshold:split files larger than this threshold' \
+			 'syncstate:get sync status info' \
+			 'status:get status info' \
+			 'deauthorize:deauthorize odrive to unlink the current user and exit' \
+			 'emptytrash:empty odrive trash' \
+			 'shutdown:shutdown odrive'
+            )
+
+            _describe -t commands 'command' commands && ret=0
+
+    ;;
+esac;
+
+return 1;
